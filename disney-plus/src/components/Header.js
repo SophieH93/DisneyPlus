@@ -10,6 +10,7 @@ function Header() {
         "
         />
       </Logo>
+
       <NavMenue>
         <a href="/home">
           <img src="/images/home-icon.svg" />
@@ -32,6 +33,7 @@ function Header() {
           <span>MOVIES</span>
         </a>
       </NavMenue>
+      <Login>Login</Login>
     </Nav>
   );
 }
@@ -45,7 +47,7 @@ const Nav = styled.nav`
   right: 0;
   display: flex;
   justify-content: space-between;
-  text-align: center;
+  align-items: center;
   padding: 0 36px;
   letter-spacing: 16px;
   z-index: 3;
@@ -58,6 +60,7 @@ const Logo = styled.a`
   max-height: 70px;
   font-size: 0;
   display: inline-block;
+
   img {
     display: block;
     width: 100%;
@@ -122,9 +125,25 @@ const NavMenue = styled.div`
     }
   }
 
-  //   @media (max-width: 768px) {
-  //     display: none;
-  //   }
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const Login = styled.a`
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid #f9f9f9;
+  border-radius: 4px;
+  transition: all 0.2s ease 0;
+
+  &:hover {
+    background-color: #f9f9f9;
+    color: #000;
+    border-color: transparent;
+  }
 `;
 
 export default Header;
