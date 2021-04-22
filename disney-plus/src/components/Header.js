@@ -24,7 +24,7 @@ function Header() {
     });
   }, [userName]);
 
-  const handleAut = () => {
+  const handleAuth = () => {
     auth
       .signInWithPopup(provider)
       .then((result) => {
@@ -40,7 +40,7 @@ function Header() {
       setUserLoginDetails({
         name: user.displayName,
         email: user.displayEmail,
-        photo: user.displayPhoto,
+        photo: user.photoURL,
       })
     );
   };
@@ -55,7 +55,7 @@ function Header() {
         />
       </Logo>
       {!userName ? (
-        <Login onClick={handleAut}>Login</Login>
+        <Login onClick={handleAuth}>Login</Login>
       ) : (
         <>
           <NavMenue>
@@ -85,7 +85,12 @@ function Header() {
               <span>SERIES</span>
             </a>
           </NavMenue>
-          <UserImg src={userPhoto} alt={userName} />
+          <SingOut>
+            <UserImg src={userPhoto} alt={userName} />
+            <DropDown>
+              <span onClick={handleAuth}>Sign out</span>
+            </DropDown>
+          </SingOut>
         </>
       )}
     </Nav>
@@ -203,4 +208,42 @@ const Login = styled.a`
 const UserImg = styled.img`
   /* height: 100%; */
 `;
+
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background-color: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgb(000/ 50%) 0px 0px 18px 0px;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 100px;
+  opacity: 0;
+`;
+
+const SingOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  ${UserImg} {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
+`;
+
 export default Header;
