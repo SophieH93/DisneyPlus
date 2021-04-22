@@ -7,6 +7,7 @@ import {
   selectUserName,
   selectUserPhoto,
   setUserLoginDetails,
+  setSignOutState,
 } from "../features/users/userSlice";
 
 function Header() {
@@ -25,14 +26,24 @@ function Header() {
   }, [userName]);
 
   const handleAuth = () => {
-    auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        setUser(result.user);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    if (!userName) {
+      auth
+        .signInWithPopup(provider)
+        .then((result) => {
+          setUser(result.user);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } else if (userName) {
+      auth
+        .signOut()
+        .then(() => {
+          dispatch(setSignOutState());
+          history.push("/");
+        })
+        .catch((error) => alert(error.message));
+    }
   };
 
   const setUser = (user) => {
@@ -232,6 +243,7 @@ const SingOut = styled.div`
   cursor: pointer;
   align-items: center;
   justify-content: center;
+
   ${UserImg} {
     border-radius: 50%;
     width: 100%;
