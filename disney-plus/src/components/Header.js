@@ -1,6 +1,17 @@
 import styled from "styled-components";
+import { auth, provider } from "../firebase";
 
 function Header() {
+  const handleAut = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
   return (
     <Nav>
       <Logo>
@@ -28,12 +39,17 @@ function Header() {
           <img src="/images/original-icon.svg" />
           <span>ORIGINALS</span>
         </a>
+
         <a>
           <img src="/images/movie-icon.svg" />
           <span>MOVIES</span>
         </a>
+        <a>
+          <img src="/images/series-icon.svg" />
+          <span>SERIES</span>
+        </a>
       </NavMenue>
-      <Login>Login</Login>
+      <Login onClick={handleAut}>Login</Login>
     </Nav>
   );
 }
