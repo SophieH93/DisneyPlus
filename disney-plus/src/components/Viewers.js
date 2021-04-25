@@ -8,7 +8,7 @@ function Viewers() {
         <img src="/images/viewers-disney.png" alt="" />
         <video autoPlay={true} loop={true} playsInline={true}>
           <source src="/videos/1564674844-disney.mp4" type="video/mp4" />
-        </video>
+        </video>{" "}
       </Wrap>
       <Wrap>
         <img src="/images/viewers-pixar.png" alt="" />
@@ -86,7 +86,7 @@ const Wrap = styled.div`
     z-index: 0;
   }
 
-  &hover {
+  &:hover {
     box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
       rgb(0 0 0 / 73%) 0px 16px 10px -10px;
     transform: scale(1.05);
